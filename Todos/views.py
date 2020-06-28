@@ -23,7 +23,7 @@ def addTodo(request):
 def deleteTodo(request , delete_item_id ):
     delete_item = TodoItem.objects.get(id=delete_item_id)
     delete_item.delete()
-    messages.error(request, "Item has been hard deleted")
+    messages.error(request, "Item has been hard removed")
     return HttpResponseRedirect('/todo/')
 
 def editTodo(request , edit_item_id ):
