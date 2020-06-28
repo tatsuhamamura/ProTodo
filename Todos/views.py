@@ -36,5 +36,5 @@ def editTodoConfirm(request , edit_item_id):
     _edit_item.target_timestamp = request.POST['target_datetime']
     _edit_item.save()
 
-    messages.success(request, "Todo ID: was updated successfully!!!" )
+    messages.success(request, "Todo was updated successfully!" )
     return HttpResponseRedirect('/todo/')
