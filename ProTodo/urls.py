@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from Todos.views import todoView , addTodo , deleteTodo ,editTodo , editTodoConfirm
+from Todos.views import todoView , addTodo , deleteTodo ,editTodo , editTodoConfirm ,todoSwitchState
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,4 +24,5 @@ urlpatterns = [
     path('deletetodo/<int:delete_item_id>', deleteTodo ),
     path('edittodo/<int:edit_item_id>', editTodo ),
     path('edittodoconfirm/<int:edit_item_id>', editTodoConfirm ),
+    path('todoswitchstate/<int:edit_item_id>', todoSwitchState ),
 ]

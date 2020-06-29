@@ -38,3 +38,20 @@ def editTodoConfirm(request , edit_item_id):
 
     messages.success(request, "Todo was updated successfully!" )
     return HttpResponseRedirect('/todo/')
+
+def todoSwitchState(request , edit_item_id):
+    print(request.POST.get('todostatus'))
+
+    selection = str(request.POST.get('todostatus'))
+    _edit_item = TodoItem.objects.get(id=edit_item_id)
+    print(_edit_item.todo_status)
+    #check the value of checkbox selected and set boolean value
+    if selection == 'on':
+        _edit_item.todo_status = True
+        print("is true")
+        messages.success(request, "Congratulations! Todo item " + "[ID:" + str(edit_item_id) + "] has been completed.")
+    else:
+        _edit_item.todo_status = False
+        print("is false")
+    _edit_item.save()
+    return HttpResponseRedirect('/todo/')

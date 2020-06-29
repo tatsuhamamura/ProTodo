@@ -66,10 +66,21 @@
             {% for todo_item in all_Items %}
 
                 <div>
-                    <li class="list-group-item list-group-item-info">
+                    <li class="{% if todo_item.todo_status %}list-group-item list-group-item-success{% else %}list-group-item list-group-item-info{% endif %}">
+
+
                         <div class="row">
                             <div class="col-6">
                                 <div class="badge badge-light">Created: {{todo_item.timestamp}}</div>
+                            <form id="todoStatus_form" action="/todoswitchstate/{{todo_item.id}}"
+                                                                      style="display: inline-block;"
+                                                                      method="post">{% csrf_token%}
+                                <div class="custom-control custom-switch">
+                                  <input type="checkbox" class="custom-control-input" name="todostatus" id="switch{{todo_item.id}}" onchange="this.form.submit()"
+                                  {% if todo_item.todo_status %} checked{% endif %}>
+                                  <label class="custom-control-label" for="switch{{todo_item.id}}">{% if todo_item.todo_status %} Completed{% else %}Awaiting{% endif %}</label>
+                                </div>
+                            </form>
                             </div>
 
                             <div class="col-sm-5 offset-sm-2 col-md-6 offset-md-0">
@@ -79,7 +90,11 @@
                                           style="display: inline-block;"
                                           method="post">{% csrf_token%}
                                             <input class="btn btn-secondary btn-sm" type="submit" value="delete"/>
+
+
+
                                     </form>
+
                                      <form action="/edittodo/{{todo_item.id}}"
                                           style="display: inline-block;"
                                           method="post">{% csrf_token%}
@@ -93,7 +108,6 @@
                        </div>
                        <div>
                            <span> {{todo_item.content}}</span>
-
                        </div>
 
                     </li>
@@ -104,29 +118,21 @@
 
     </div>
 
- <fieldset class="form-group">
-    <label for="exampleSelect1">Type of Construction</label>
-    <select class="form-control" id="TypeOfConstruction">
-      <option>Traditional Masonry</option>
-      <option>Timber Frame</option>
-      </select>
-  </fieldset>
-
-    <fieldset class="form-group wfiedls">
-    <label for="PartyWalls">Which walls are party walls?</label>
-	   <br><input type="checkbox"> W1
-	   <br><input type="checkbox"> W2
-	   <br><input type="checkbox"> W3
-	   <br><input type="checkbox"> W4
-  </fieldset>
-<style type="text/css">
-  .wfiedls{
-    display: none;
-
-  }
-</style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
  <script type="text/javascript">
+
+   function setDoneStatus(checkbox) {
+       alert(checkbox.value);
+      todoStatus_form.submit();
+        /*
+        if (checkbox.checked != true)
+          {
+            alert("Are you sure you wish to undo your done?");
+          }
+         */
+    }
+
+
    $(document).ready(function(){
     $("#TypeOfConstruction").on('change',function(){
       var selectedBalue = $("#TypeOfConstruction").val();
