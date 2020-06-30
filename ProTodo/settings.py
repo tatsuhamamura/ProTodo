@@ -25,7 +25,7 @@ SECRET_KEY = '$zj!bi08zg%^d8*omc3-c7y6#w8ize&zniocm%n=gg0i6pjv+4'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+#ALLOWED_HOSTS = ['tatsuhamamura.pythonanywhere.com']
 
 
 # Application definition
@@ -120,3 +120,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = '/static/home/tatsuhamamura/ProTodo/static'
